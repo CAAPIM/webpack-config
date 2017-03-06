@@ -14,12 +14,10 @@ import scss from './loaders/scss';
 import webfonts from './loaders/webfonts';
 import fontgen from './loaders/fontgen';
 import eslint from './preloaders/eslint';
-import baggage from './preloaders/baggage';
 import sourcemap from './preloaders/sourceMap';
 
 export default function (options) {
   return {
-    baggage: baggage(options),
     fontgen: fontgen(options),
     css: css(options),
     eslint: eslint(options),

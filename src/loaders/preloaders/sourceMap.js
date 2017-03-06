@@ -6,8 +6,9 @@
 
 export default function () {
   return {
+    enforce: 'pre',
     test: /\.js$/,
-    loader: 'source-map-loader',
+    use: 'source-map-loader',
     exclude: /react-hot-loader/,
   };
 }

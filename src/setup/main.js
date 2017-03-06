@@ -14,20 +14,28 @@ export default function (config, options, loaders, plugins) {
   /* DEFAULTS */
   config = config.merge({
     output: {
-      publicPath: `/${options.outputPath.replace('public/', '')}`,
-      chunkFilename: `${options.filenames.replace('hash', 'chunkhash')}.js`,
+      publicPath: `/${options.outputPath.replace('public', '')}`,
+      chunkFilename: `/${options.filenames.replace('hash', 'chunkhash')}.js`,
     },
     plugins: [
-      new ExtractText(`${options.filenames}.css`, { allChunks: true }),
+      new webpack.LoaderOptionsPlugin({
+        debug: true,
+        options: {
+          context: __dirname,
+          postcss: () => ([autoprefixer]),
+        },
+      }),
+      new ExtractText({
+        filename: `${options.filenames}.css`,
+        disable: false,
+        allChunks: true,
+      }),
       new webpack.ContextReplacementPlugin(/moment[\\]locale$/, /^\.\/(en-us)$/),
       plugins.assets,
-      plugins.occurenceOrder,
+      plugins.occurrenceOrder,
     ],
     module: {
-      preLoaders: [
-        loaders.baggage,
-      ],
-      loaders: [
+      rules: [
         loaders.css,
         loaders.scss,
         loaders.js,
@@ -39,7 +47,6 @@ export default function (config, options, loaders, plugins) {
         loaders.images,
       ],
     },
-    postcss: () => ([autoprefixer]),
   });
 
   /* LINTING */
@@ -47,11 +54,12 @@ export default function (config, options, loaders, plugins) {
     // eslint
     config = config.merge({
       module: {
-        preLoaders: [
+        rules: [
           loaders.eslint,
         ],
       },
     });
+
     // flow
     config.plugins.push(plugins.flowStatus);
   }
@@ -64,14 +72,13 @@ export default function (config, options, loaders, plugins) {
   /* SOURCEMAPS */
   if (options.development) {
     config = config.merge({
-      debug: true,
       devtool: '#eval-cheap-module-source-map',
       output: {
         devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]?[loaders]',
         pathinfo: true,
       },
       module: {
-        preLoaders: [
+        rules: [
           loaders.sourcemap,
         ],
       },
@@ -87,7 +94,7 @@ export default function (config, options, loaders, plugins) {
   if (options.hot && options.devServer) {
     config = config.merge({
       output: {
-        publicPath: `${options.devServer}/${options.outputPath}`,
+        publicPath: `${options.devServer}/${options.outputPath}/`,
       },
       devServer: {
         contentBase: options.contentBase,

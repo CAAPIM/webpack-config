@@ -14,7 +14,7 @@ node_modules
 .idea
 
 # Test builds
-/tests/acceptance/builds
+/tests/acceptance/build
 
 # Build
 lib

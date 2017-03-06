@@ -22,6 +22,6 @@ export default function (options) {
       // prevent BrowserSync from reloading the page
       // and let Webpack Dev Server take care of this
       reload: false,
-    }
+    },
   );
 }

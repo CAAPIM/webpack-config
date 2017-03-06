@@ -7,6 +7,8 @@
 export default function () {
   return {
     test: /\.html$/,
-    loader: 'html',
+    use: {
+      loader: 'html-loader',
+    },
   };
 }

@@ -10,23 +10,23 @@ import applications from '../../../src';
 describe('setup/main', () => {
   let config;
 
-  it('can change options depending on environment', () => {
+  it('will not contain the hash in the development environment', () => {
     config = applications({
       development: true,
       outputPath: 'foobar',
     });
 
-    expect(config.debug).toEqual(true);
     expect(config.output.path).toEqual(path.resolve('foobar'));
     expect(config.output.filename).not.toContain('[hash]');
     expect(config.output.filename).not.toContain('[hash]');
+  });
 
+  it('will contain the hash if not in the development environment', () => {
     config = applications({
       development: false,
       outputPath: 'foobar',
     });
 
-    expect(config.debug).toEqual(false);
     expect(config.output.path).toEqual(path.resolve('foobar'));
     expect(config.output.filename).toContain('[hash]');
   });
@@ -43,7 +43,7 @@ describe('setup/main', () => {
     config = applications({
       development: false,
       module: {
-        loaders: [
+        rules: [
           { foo: 'bar' },
         ],
       },
@@ -52,7 +52,21 @@ describe('setup/main', () => {
       ],
     });
 
-    expect(config.module.loaders[0]).toEqual({ foo: 'bar' });
+    expect(config.module.rules[0]).toEqual({ foo: 'bar' });
     expect(config.plugins[0]).toEqual({ foo: 'bar' });
+  });
+
+  it('will add the eslint rules if the linting and dev options are enabled', () => {
+    config = applications({
+      linting: true,
+      development: true,
+    });
+    let keyFound = false;
+
+    if (config.module.rules.filter((item) => item.use === 'eslint-loader').length > 0) {
+      keyFound = true;
+    }
+
+    expect(keyFound).toEqual(true);
   });
 });

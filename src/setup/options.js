@@ -12,6 +12,8 @@ import merge from 'merge';
 export default function (options) {
   const env = process.env.NODE_ENV;
   const development = options.development || env === 'development';
+  const cssLoader = development ?
+    'css-loader?source-map-loader' : '-!css-loader?{"modules":true}!postcss-loader??postcss-ident';
 
   options = merge.recursive({
 
@@ -41,10 +43,16 @@ export default function (options) {
     linting: false,
     inlineLimit: 50000,
 
-    /* Loaders */
-    loaders: {
-      js: 'babel-loader',
-      css: development ? 'css-loader?sourceMap' : 'css-loader!postcss-loader',
+    /* Rules */
+    rules: {
+      js: {
+        test: /\.js$/,
+        use: 'babel-loader',
+      },
+      css: {
+        test: /\.css$/,
+        use: cssLoader,
+      },
     },
   }, options);
 

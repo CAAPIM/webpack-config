@@ -7,6 +7,6 @@
 export default function () {
   return {
     test: /\.json/,
-    loader: 'json',
+    use: 'json-loader',
   };
 }

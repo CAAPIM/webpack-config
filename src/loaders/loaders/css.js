@@ -9,6 +9,9 @@ import ExtractText from 'extract-text-webpack-plugin';
 export default function (options) {
   return {
     test: /\.css$/,
-    loader: ExtractText.extract('style', options.loaders.css),
+    use: ExtractText.extract({
+      fallback: 'style-loader',
+      use: options.rules.css.use,
+    }),
   };
 }

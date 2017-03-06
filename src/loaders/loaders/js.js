@@ -7,8 +7,7 @@
 // TODO: Add HMR without overriding user defined babel configs
 export default function (options) {
   return {
-    test: /\.js$/,
-    loader: options.loaders.js,
+    ...options.rules.js,
     include: options.sourcePath,
   };
 }

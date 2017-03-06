@@ -5,4 +5,4 @@ flow-coverage/*
 coverage/*
 example/*
 lib/*
-tests/acceptance/builds/*
+tests/acceptance/build/*

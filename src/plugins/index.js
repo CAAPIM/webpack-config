@@ -8,7 +8,7 @@ import assets from './assets';
 import browserSync from './browserSync';
 import define from './define';
 import flowStatus from './flowStatus';
-import occurenceOrder from './occurenceOrder';
+import occurrenceOrder from './occurrenceOrder';
 import provide from './provide';
 import stats from './stats';
 import uglify from './uglify';
@@ -19,7 +19,7 @@ export default function (options) {
     browserSync: browserSync(options),
     define: define(options),
     flowStatus: flowStatus(options),
-    occurenceOrder: occurenceOrder(options),
+    occurrenceOrder: occurrenceOrder(options),
     provide: provide(options),
     stats: stats(options),
     uglify: uglify(options),

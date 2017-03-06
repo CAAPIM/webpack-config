@@ -6,8 +6,9 @@
 
 export default function () {
   return {
+    enforce: 'pre',
     test: /\.js$/,
-    loader: 'eslint-loader',
+    use: 'eslint-loader',
     exclude: /node_modules/,
   };
 }

@@ -9,11 +9,9 @@ import Config from 'webpack-config';
 import CleanPlugin from 'clean-webpack-plugin';
 import objectPath from 'object-path';
 
-export default function (options, loaders, plugins) {
+export default function (options, rules, plugins) {
   let config = new Config().merge({
-    debug: true,
     cache: true,
-
     entry: {
       [options.name]: [`./${options.entry}`],
     },
@@ -23,11 +21,11 @@ export default function (options, loaders, plugins) {
       filename: `${options.filenames}.js`,
     },
     resolve: {
-      extensions: ['', '.js'],
+      extensions: ['*', '.js'],
     },
     plugins: objectPath.get(options, 'plugins', []),
     module: {
-      loaders: objectPath.get(options, 'module.loaders', []),
+      rules: objectPath.get(options, 'module.rules', []),
     },
   });
 
@@ -35,7 +33,6 @@ export default function (options, loaders, plugins) {
 
   if (!options.development) {
     config = config.merge({
-      debug: false,
       devtool: false,
       output: {
         pathinfo: false,

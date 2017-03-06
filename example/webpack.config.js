@@ -4,11 +4,18 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-const config = require('ca-webpack-config');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const config = require('../');
 
 module.exports = config({
   sourcePath: 'src',
-  outputPath: 'builds',
+  outputPath: 'build',
   hot: true,
   linting: true,
+  plugins: [
+    new HTMLWebpackPlugin({
+      inject: 'body',
+      template: 'index_template.html',
+    }),
+  ],
 });

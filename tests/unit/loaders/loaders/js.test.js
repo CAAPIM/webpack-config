@@ -13,11 +13,15 @@ describe('loaders/loaders/js', () => {
     config = loader({
       react: true,
       sourcePath: 'foobar',
-      loaders: {
-        js: 'babel',
+      rules: {
+        js: {
+          test: /\.js$/,
+          use: 'babel-loader',
+        },
       },
     });
 
-    expect(config.loader).toContain('babel');
+    /* eslint-disable */
+    expect(config).toEqual({"include": "foobar", "test": /\.js$/, "use": "babel-loader"});
   });
 });
