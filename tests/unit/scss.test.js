@@ -4,15 +4,10 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { resolve } from 'path';
-import Config from 'webpack-config';
+import config from '../../src/scss';
 
 describe('scssConfig', () => {
   it('should contain scss loader', () => {
-    const config = new Config().extend(
-      resolve(__dirname, '../../src/scss.js'),
-    );
-
     expect(config.module.rules[0].test).toEqual(/\.scss$/);
   });
 });

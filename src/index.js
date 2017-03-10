@@ -4,15 +4,19 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { resolve } from 'path';
-import Config from 'webpack-config';
+import base from './base';
+import css from './css';
+import scss from './scss';
+import fontgen from './fontgen';
+import eslint from './eslint';
+import flowStatus from './flowStatus';
+import production from './production';
 
-export default new Config().extend(
-  resolve(__dirname, 'base.js'),
-  resolve(__dirname, 'css.js'),
-  resolve(__dirname, 'scss.js'),
-  resolve(__dirname, 'fontgen.js'),
-  resolve(__dirname, 'eslint.js'),
-  resolve(__dirname, 'flowStatus.js'),
-  resolve(__dirname, 'production.js'),
+export default base.merge(
+  css,
+  scss,
+  fontgen,
+  eslint,
+  flowStatus,
+  production,
 );

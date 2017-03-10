@@ -4,17 +4,11 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { resolve } from 'path';
-import Config from 'webpack-config';
-
-import { flowStatus } from '../../src/plugins';
+import config from '../../src/flowStatus';
+import flowStatus from '../../src/plugins/flowStatus';
 
 describe('flowStatusConfig', () => {
   it('should contain flowStatus plugin', () => {
-    const config = new Config().extend(
-      resolve(__dirname, '../../src/flowStatus.js'),
-    );
-
     expect(config.plugins).toContain(flowStatus);
   });
 });

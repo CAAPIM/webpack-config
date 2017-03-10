@@ -4,9 +4,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import {
-  flowStatus,
-} from '../../../src/plugins/';
+import flowStatus from '../../../src/plugins/flowStatus';
 
 describe('flowStatus', () => {
   it('should contain onError handler', () => {

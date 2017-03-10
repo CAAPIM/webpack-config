@@ -5,7 +5,6 @@
  */
 
 import Config from 'webpack-config';
-import { resolve } from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 export default new Config().extend('ca').merge({

@@ -9,21 +9,22 @@ import Config from 'webpack-config';
 import autoprefixer from 'autoprefixer';
 import ExtractText from 'extract-text-webpack-plugin';
 
-import loaders from './loaders';
-import {
-  browserSync,
-  define,
-  stats,
-} from './plugins';
+import fontsLoader from './loaders/loaders/fonts';
+import imagesLoader from './loaders/loaders/images';
+import jsLoader from './loaders/loaders/js';
+
+import browserSync from './plugins/browserSync';
+import define from './plugins/define';
+import stats from './plugins/stats';
 
 const env = process.env.NODE_ENV;
 const isWebpackDevServer = process.argv[1].indexOf('webpack-dev-server') !== -1;
 const inProduction = env === 'production';
-const filename = inProduction ? '[name]' : '[name].[hash]';
+const filename = inProduction ? '[name].[hash]' : '[name]';
 
 // SHARED CONFIGURATION BETWEEN ALL ENVIRONMENTS
-/* eslint-disable import/no-mutable-exports */
-let config = new Config().merge({
+export default new Config().merge({
+  devtool: inProduction ? false : 'cheap-module-source-map',
   cache: true,
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -33,11 +34,23 @@ let config = new Config().merge({
   },
   output: {
     pathinfo: !inProduction,
-    path: '/build',
+    path: `${process.cwd()}/build`,
     filename: `${filename}.js`,
     publicPath: '/',
     chunkFilename: `/${filename.replace('hash', 'chunkhash')}.js`,
   },
+
+  // ADD WEBPACK DEV SERVER CONFIGURATION IN WATCH MODE
+  ...(isWebpackDevServer ? {
+    devServer: {
+      contentBase: process.env.APP_URL,
+      historyApiFallback: {
+        index: '/index.html',
+      },
+      hot: true,
+    },
+  } : {}),
+
   plugins: [
     new webpack.LoaderOptionsPlugin({
       debug: true,
@@ -57,40 +70,23 @@ let config = new Config().merge({
       children: true,
     }),
     define,
+
+    // development plugins
+    ...(!inProduction ? [
+      stats,
+    ] : []),
+
+    // ADD HMR PLUGIN IN WATCH MODE
+    ...(isWebpackDevServer ? [
+      browserSync,
+      new webpack.HotModuleReplacementPlugin(),
+    ] : []),
   ],
   module: {
     rules: [
-      loaders.fonts,
-      loaders.images,
-      loaders.js,
+      fontsLoader,
+      imagesLoader,
+      jsLoader,
     ],
   },
 });
-
-// NON PRODUCTION CONFIGURATION
-if (!inProduction) {
-  config = config.merge({
-    plugins: [
-      stats,
-    ],
-  });
-
-  // ADD WEBPACK DEV SERVER CONFIGURATION IN WATCH MODE
-  if (isWebpackDevServer || process.env.NODE_ENV === 'development') {
-    config = config.merge({
-      devServer: {
-        contentBase: process.env.APP_URL,
-        historyApiFallback: {
-          index: '/index.html',
-        },
-        hot: true,
-      },
-      plugins: [
-        browserSync,
-        new webpack.HotModuleReplacementPlugin(),
-      ],
-    });
-  }
-}
-
-export default config;

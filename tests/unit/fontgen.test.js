@@ -4,15 +4,10 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { resolve } from 'path';
-import Config from 'webpack-config';
+import config from '../../src/fontgen';
 
 describe('fontgenConfig', () => {
   it('should contain fontgen loader', () => {
-    const config = new Config().extend(
-      resolve(__dirname, '../../src/fontgen.js'),
-    );
-
     expect(config.module.rules[0].test).toEqual(/\.font\.json$/);
   });
 });

@@ -4,15 +4,12 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { resolve } from 'path';
-import Config from 'webpack-config';
+import baseConfig from '../../src/base';
+import eslintConfig from '../../src/eslint';
 
 describe('eslintConfig', () => {
   it('can merge loaders and plugins', () => {
-    const config = new Config().extend(
-      resolve(__dirname, '../../src/base.js'),
-      resolve(__dirname, '../../src/eslint.js'),
-    );
+    const config = baseConfig.merge(eslintConfig);
 
     let keyFound = false;
 

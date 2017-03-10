@@ -6,7 +6,7 @@
 
 import Config from 'webpack-config';
 
-import { eslint } from './loaders';
+import eslint from './loaders/preloaders/eslint';
 
 export default new Config().merge({
   module: {

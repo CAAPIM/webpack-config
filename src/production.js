@@ -6,12 +6,12 @@
 
 import webpack from 'webpack';
 import Config from 'webpack-config';
-import CleanPlugin from 'clean-webpack-plugin';
+
+const env = process.env.NODE_ENV;
+const inProduction = env === 'production';
 
 export default new Config().merge({
-  devtool: false,
-  plugins: [
-    new CleanPlugin('/build', process.cwd()),
+  plugins: inProduction ? [
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       compress: {
@@ -23,5 +23,5 @@ export default new Config().merge({
     new webpack.optimize.MinChunkSizePlugin({
       minChunkSize: 2048,
     }),
-  ],
+  ] : [],
 });

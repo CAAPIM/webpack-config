@@ -6,7 +6,7 @@
 
 import Config from 'webpack-config';
 
-import { flowStatus } from './plugins';
+import flowStatus from './plugins/flowStatus';
 
 export default new Config().merge({
   plugins: [
