@@ -33,7 +33,7 @@ let config = new Config().merge({
   },
   output: {
     pathinfo: !inProduction,
-    path: 'build',
+    path: '/build',
     filename: `${filename}.js`,
     publicPath: '/',
     chunkFilename: `/${filename.replace('hash', 'chunkhash')}.js`,

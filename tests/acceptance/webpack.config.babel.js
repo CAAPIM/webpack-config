@@ -6,6 +6,10 @@
 
 /* eslint-disable import/no-unresolved */
 
-const baseConfig = require('../../lib');
+import Config from 'webpack-config';
 
-module.exports = baseConfig;
+export default new Config().extend('../../../lib/index.js').merge({
+  output: {
+    path: 'build',
+  },
+});
