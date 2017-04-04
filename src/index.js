@@ -7,7 +7,7 @@
 import base from './base';
 import css from './css';
 import scss from './scss';
-import imageSvg from './imageSvg';
+import reactSvg from './reactSvg';
 import fontgen from './fontgen';
 import eslint from './eslint';
 import flowStatus from './flowStatus';
@@ -17,7 +17,7 @@ import browserSync from './browserSync';
 export default base.merge(
   css,
   scss,
-  imageSvg,
+  reactSvg,
   fontgen,
   eslint,
   flowStatus,
