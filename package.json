@@ -64,7 +64,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "rimraf": "^2.6.1",
-    "semantic-release": "^6.3.6",
+    "semantic-release": "^7.0.1",
     "validate-commit-msg": "^2.12.2",
     "webpack": "^2.6.1",
     "webpack-config": "^7.0.0",
