@@ -34,7 +34,7 @@
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
-    "react-svg-loader": "^1.1.1",
+    "react-svg-loader": "^2.0.0",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "stats-webpack-plugin": "^0.6.0",
