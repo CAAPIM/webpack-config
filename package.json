@@ -29,7 +29,7 @@
     "flow-bin": "^0.48.0",
     "flow-status-webpack-plugin": "^0.1.7",
     "html-loader": "^0.4.5",
-    "image-webpack-loader": "^3.3.1",
+    "image-webpack-loader": "^4.0.0",
     "imagemin": "^5.3.1",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.3",
