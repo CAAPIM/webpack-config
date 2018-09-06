@@ -25,6 +25,5 @@ export default new Config().merge({
         ascii_only: true,
       },
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
   ] : [],
 });
