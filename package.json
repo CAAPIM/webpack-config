@@ -68,7 +68,7 @@
     "validate-commit-msg": "^2.14.0",
     "webpack": "3.10.0",
     "webpack-config": "7.5.0",
-    "webpack-dev-server": "2.11.1"
+    "webpack-dev-server": "3.0.0"
   },
   "scripts": {
     "codecov": "codecov",
