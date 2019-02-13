@@ -50,7 +50,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-preset-ca": "^1.1.0",
-    "codecov": "^3.1.0",
+    "codecov": "^3.2.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "2.1.0",
     "decamelize": "2.0.0",
