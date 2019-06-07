@@ -19,7 +19,7 @@
     "autoprefixer": "7.2.5",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
-    "browser-sync": "^2.24.7",
+    "browser-sync": "^2.26.6",
     "browser-sync-webpack-plugin": "1.2.0",
     "css-loader": "0.28.9",
     "dotenv-webpack": "1.5.5",
